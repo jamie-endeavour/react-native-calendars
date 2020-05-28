@@ -127,10 +127,7 @@ export default class Timeline extends React.PureComponent {
             onPress={() => {
               if (this.props.blockTapped) this.props.blockTapped(timeText);
             }}
-            style={{
-              height: 50,
-              backgroundColor: 'red',
-            }}
+            style={{height: 50}}
           />
         </View>,
         <View
@@ -143,10 +140,7 @@ export default class Timeline extends React.PureComponent {
             onPress={() => {
               if (this.props.blockTapped) this.props.blockTapped(timeText);
             }}
-            style={{
-              height: 50,
-              backgroundColor: 'blue',
-            }}
+            style={{height: 50}}
           />
         </View>,
       ];
