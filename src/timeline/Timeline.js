@@ -188,8 +188,8 @@ export default class Timeline extends React.PureComponent {
               ) : null}
               {numberOfLines > 2 ? (
                 <Text style={this.styles.eventTimes} numberOfLines={1}>
-                  {moment(event.start).format(formatTime)} -{' '}
-                  {moment(event.end).format(formatTime)}
+                  {moment(event.start).utc().format(formatTime)} -{' '}
+                  {moment(event.end).utc().format(formatTime)}
                 </Text>
               ) : null}
             </View>
