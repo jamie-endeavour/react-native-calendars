@@ -4,7 +4,7 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import populateEvents from './Packer';
@@ -33,21 +33,23 @@ export default class Timeline extends React.PureComponent {
     end: PropTypes.number,
     eventTapped: PropTypes.func,
     format24h: PropTypes.bool,
-    events: PropTypes.arrayOf(PropTypes.shape({
-      start: PropTypes.string.isRequired,
-      end: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      summary: PropTypes.string.isRequired,
-      color: PropTypes.string
-    })).isRequired
-  }
+    events: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: PropTypes.string.isRequired,
+        end: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        summary: PropTypes.string.isRequired,
+        color: PropTypes.string,
+      }),
+    ).isRequired,
+  };
 
   static defaultProps = {
     start: 0,
     end: 24,
     events: [],
-    format24h: true
-  }
+    format24h: true,
+  };
 
   constructor(props) {
     super(props);
@@ -61,14 +63,14 @@ export default class Timeline extends React.PureComponent {
     const verifiedInitPosition = initPosition < 0 ? 0 : initPosition;
     this.state = {
       _scrollY: verifiedInitPosition,
-      packedEvents
+      packedEvents,
     };
   }
 
   UNSAFE_componentWillReceiveProps({events, start = 0}) {
     const width = dimensionWidth - LEFT_MARGIN;
     this.setState({
-      packedEvents: populateEvents(events, width, start)
+      packedEvents: populateEvents(events, width, start),
     });
   }
 
@@ -82,7 +84,7 @@ export default class Timeline extends React.PureComponent {
         this._scrollView.scrollTo({
           x: 0,
           y: this.state._scrollY,
-          animated: true
+          animated: true,
         });
       }
     }, 1);
@@ -113,22 +115,35 @@ export default class Timeline extends React.PureComponent {
           style={[this.styles.timeLabel, {top: offset * index - 6}]}>
           {timeText}
         </Text>,
-        i === start ? null : (
-          <View
-            key={`line${i}`}
-            style={[
-              this.styles.line,
-              {top: offset * index, width: dimensionWidth - EVENT_DIFF}
-            ]}
+        // i === start ? null : (
+        <View
+          key={`line${i}`}
+          style={[
+            {top: offset * index, width: dimensionWidth - EVENT_DIFF},
+            this.styles.line,
+          ]}>
+          <TouchableOpacity
+            onPress={() => console.log('test')}
+            style={{
+              height: 50,
+              backgroundColor: 'red',
+            }}
           />
-        ),
+        </View>,
         <View
           key={`lineHalf${i}`}
           style={[
+            {top: offset * (index + 0.5), width: dimensionWidth - EVENT_DIFF},
             this.styles.line,
-            {top: offset * (index + 0.5), width: dimensionWidth - EVENT_DIFF}
-          ]}
-        />
+          ]}>
+          <TouchableOpacity
+            onPress={() => console.log('test two')}
+            style={{
+              height: 50,
+              backgroundColor: 'blue',
+            }}
+          />
+        </View>,
       ];
     });
   }
@@ -145,7 +160,7 @@ export default class Timeline extends React.PureComponent {
         height: event.height,
         width: event.width,
         top: event.top,
-        backgroundColor: event.color ? event.color : '#add8e6'
+        backgroundColor: event.color ? event.color : '#add8e6',
       };
 
       // Fixing the number of lines for the event title makes this calculation easier.
@@ -194,10 +209,10 @@ export default class Timeline extends React.PureComponent {
   render() {
     return (
       <ScrollView
-        ref={ref => (this._scrollView = ref)}
+        ref={(ref) => (this._scrollView = ref)}
         contentContainerStyle={[
           this.styles.contentStyle,
-          {width: dimensionWidth}
+          {width: dimensionWidth},
         ]}>
         {this._renderLines()}
         {this._renderEvents()}
