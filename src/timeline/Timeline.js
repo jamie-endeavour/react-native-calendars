@@ -31,6 +31,7 @@ export default class Timeline extends React.PureComponent {
   static propTypes = {
     start: PropTypes.number,
     end: PropTypes.number,
+    blockTapped: PropTypes.func,
     eventTapped: PropTypes.func,
     format24h: PropTypes.bool,
     events: PropTypes.arrayOf(
@@ -123,7 +124,9 @@ export default class Timeline extends React.PureComponent {
             this.styles.line,
           ]}>
           <TouchableOpacity
-            onPress={() => console.log('test')}
+            onPress={() => {
+              if (this.props.blockTapped) this.props.blockTapped(timeText);
+            }}
             style={{
               height: 50,
               backgroundColor: 'red',
@@ -137,7 +140,9 @@ export default class Timeline extends React.PureComponent {
             this.styles.line,
           ]}>
           <TouchableOpacity
-            onPress={() => console.log('test two')}
+            onPress={() => {
+              if (this.props.blockTapped) this.props.blockTapped(timeText);
+            }}
             style={{
               height: 50,
               backgroundColor: 'blue',
