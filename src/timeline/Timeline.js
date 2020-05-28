@@ -38,7 +38,7 @@ export default class Timeline extends React.PureComponent {
       PropTypes.shape({
         start: PropTypes.string.isRequired,
         end: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
+        title: PropTypes.string,
         summary: PropTypes.string.isRequired,
         color: PropTypes.string,
       }),
