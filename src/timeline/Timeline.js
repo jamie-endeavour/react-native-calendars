@@ -116,33 +116,56 @@ export default class Timeline extends React.PureComponent {
           style={[this.styles.timeLabel, {top: offset * index - 6}]}>
           {timeText}
         </Text>,
-        // i === start ? null : (
-        <View
+
+        <TouchableOpacity
           key={`line${i}`}
+          onPress={() => {
+            if (this.props.blockTapped) this.props.blockTapped(timeText);
+          }}
           style={[
-            {top: offset * index, width: dimensionWidth - EVENT_DIFF},
+            {
+              top: offset * index,
+              width: dimensionWidth - EVENT_DIFF,
+              zIndex: 1,
+            },
             this.styles.line,
+            {
+              position: 'absolute',
+              minHeight: 50,
+              flex: 1,
+              opacity: 1,
+              backgroundColor: 'rgba(255, 255, 255, 0)',
+              borderTopWidth: 1,
+              borderTopColor: '#b1b1b1',
+            },
           ]}>
-          <TouchableOpacity
-            onPress={() => {
-              if (this.props.blockTapped) this.props.blockTapped(timeText);
-            }}
-            style={{height: 50}}
-          />
-        </View>,
-        <View
+          <View />
+        </TouchableOpacity>,
+
+        <TouchableOpacity
+          onPress={() => {
+            if (this.props.blockTapped) this.props.blockTapped(timeText);
+          }}
           key={`lineHalf${i}`}
           style={[
-            {top: offset * (index + 0.5), width: dimensionWidth - EVENT_DIFF},
+            {
+              top: offset * (index + 0.5),
+              width: dimensionWidth - EVENT_DIFF,
+              zIndex: 1,
+            },
             this.styles.line,
+            {
+              position: 'absolute',
+              minHeight: 50,
+              flex: 1,
+              opacity: 1,
+              backgroundColor: 'rgba(255, 255, 255, 0)',
+              borderTopWidth: 1,
+              borderTopColor: '#b1b1b1',
+            },
           ]}>
-          <TouchableOpacity
-            onPress={() => {
-              if (this.props.blockTapped) this.props.blockTapped(timeText);
-            }}
-            style={{height: 50}}
-          />
-        </View>,
+          <View />
+        </TouchableOpacity>,
       ];
     });
   }
