@@ -194,7 +194,7 @@ export default class Timeline extends React.PureComponent {
           activeOpacity={0.9}
           onPress={() => this._onEventTapped(this.props.events[event.index])}
           key={i}
-          style={[this.styles.event, style]}>
+          style={[this.styles.event, style, {zIndex: 2}]}>
           {this.props.renderEvent ? (
             this.props.renderEvent(event)
           ) : (
