@@ -204,7 +204,7 @@ export default class Timeline extends React.PureComponent {
           ) : (
             <View>
               <Text numberOfLines={1} style={this.styles.eventTitle}>
-                {event.title || 'Event'}
+                {event.title || 'Unavailable'}
               </Text>
               {numberOfLines > 1 ? (
                 <Text
