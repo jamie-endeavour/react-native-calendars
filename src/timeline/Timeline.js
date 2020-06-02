@@ -126,7 +126,7 @@ export default class Timeline extends React.PureComponent {
             {
               top: offset * index,
               width: dimensionWidth - EVENT_DIFF,
-              zIndex: 1,
+              zIndex: Platform.OS === 'android' ? 1 : null,
             },
             this.styles.line,
             {
@@ -151,7 +151,7 @@ export default class Timeline extends React.PureComponent {
             {
               top: offset * (index + 0.5),
               width: dimensionWidth - EVENT_DIFF,
-              zIndex: 1,
+              zIndex: Platform.OS === 'android' ? 1 : null,
             },
             this.styles.line,
             {
@@ -194,7 +194,11 @@ export default class Timeline extends React.PureComponent {
           activeOpacity={0.9}
           onPress={() => this._onEventTapped(this.props.events[event.index])}
           key={i}
-          style={[this.styles.event, style, {zIndex: 2}]}>
+          style={[
+            this.styles.event,
+            style,
+            {zIndex: Platform.OS === 'android' ? 2 : null},
+          ]}>
           {this.props.renderEvent ? (
             this.props.renderEvent(event)
           ) : (
