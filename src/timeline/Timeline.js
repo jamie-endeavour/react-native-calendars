@@ -172,9 +172,11 @@ export default class Timeline extends React.PureComponent {
     });
   }
 
-  _onRefresh() {
-    this.props.refreshCallback();
-  }
+  _onRefresh = () => {
+    if (this.props.refreshCallback) {
+      this.props.refreshCallback();
+    }
+  };
 
   _onEventTapped(event) {
     this.props.eventTapped(event);
