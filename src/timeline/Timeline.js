@@ -65,6 +65,7 @@ export default class Timeline extends React.PureComponent {
     this.state = {
       _scrollY: verifiedInitPosition,
       packedEvents,
+      refreshing: false,
     };
   }
 
@@ -170,6 +171,10 @@ export default class Timeline extends React.PureComponent {
     });
   }
 
+  _onRefresh() {
+    this.props.refreshCallback();
+  }
+
   _onEventTapped(event) {
     this.props.eventTapped(event);
   }
@@ -235,6 +240,14 @@ export default class Timeline extends React.PureComponent {
   render() {
     return (
       <ScrollView
+        refreshControl={
+          this.props.refreshCallback ? (
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          ) : null
+        }
         ref={(ref) => (this._scrollView = ref)}
         contentContainerStyle={[
           this.styles.contentStyle,
