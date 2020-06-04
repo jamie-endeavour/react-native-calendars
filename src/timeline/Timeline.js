@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
+  RefreshControl,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import populateEvents from './Packer';
