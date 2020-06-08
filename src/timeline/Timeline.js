@@ -144,7 +144,18 @@ export default class Timeline extends React.PureComponent {
 
         <TouchableOpacity
           onPress={() => {
-            if (this.props.blockTapped) this.props.blockTapped(timeText);
+            let blockTimeText;
+            if (i < 12) {
+              blockTimeText = !format24h ? `0${i}:30 AM` : `0${i}:30`;
+            } else if (i === 12) {
+              blockTimeText = !format24h ? `${i}:30 PM` : `${i}:30`;
+            } else if (i === 24) {
+              blockTimeText = !format24h ? '12:30 AM' : '23:30';
+            } else {
+              blockTimeText = !format24h ? `${i - 12}:30 PM` : `${i}:30`;
+            }
+
+            if (this.props.blockTapped) this.props.blockTapped(blockTimeText);
           }}
           key={`lineHalf${i}`}
           style={[
