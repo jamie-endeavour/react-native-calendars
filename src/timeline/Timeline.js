@@ -101,8 +101,11 @@ export default class Timeline extends React.PureComponent {
 
     return range(start, end + 1).map((i, index) => {
       let timeText;
-      if (i < 12) {
+
+      if (i < 10) {
         timeText = !format24h ? `0${i} AM` : `0${i}:00`;
+      } else if (i >= 10 && i < 12) {
+        timeText = !format24h ? `${i} AM` : `${i}:00`;
       } else if (i === 12) {
         timeText = !format24h ? `${i} PM` : `${i}:00`;
       } else if (i === 24) {
@@ -145,8 +148,10 @@ export default class Timeline extends React.PureComponent {
         <TouchableOpacity
           onPress={() => {
             let blockTimeText;
-            if (i < 12) {
+            if (i < 10) {
               blockTimeText = !format24h ? `0${i}:30 AM` : `0${i}:30`;
+            } else if (i >= 10 && i < 12) {
+              blockTimeText = !format24h ? `${i}:30 AM` : `${i}:30`;
             } else if (i === 12) {
               blockTimeText = !format24h ? `${i}:30 PM` : `${i}:30`;
             } else if (i === 24) {
